@@ -1,0 +1,20 @@
+{
+    "name": "glow/robots",
+    "description": "Robots.txt parser and generator toolset",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kingdom Development",
+            "email": "osi@kingdom.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "tomverran/robots-txt-checker": "1.01"
+    },
+    "autoload": {
+        "psr-4": {
+            "Glow\\Robots\\": ""
+        }
+    }
+}

@@ -295,10 +295,10 @@ class Parser {
     /**
      * Set Error
      * Sets an error
-     * @param [type] $code    [description]
-     * @param [type] $message [description]
-     * @param [type] $line    [description]
-     * @param [type] $level   [description]
+     * @param int $code
+     * @param string $message
+     * @param int $line
+     * @param string $level
      */
     protected function set_error($code, $message, $line, $level) {
         $this->errors[] = array(
@@ -316,8 +316,7 @@ class Parser {
      * A nice helper method that creates (if needed) and increments counters
      *
      * @access protected
-     * @param  [type] $idx [description]
-     * @return [type]      [description]
+     * @param  string $idx
      */
     protected function increment_counter($idx) {
         if (!isset($this->parsed['--META--']['counts'][$idx])) {
@@ -327,6 +326,15 @@ class Parser {
         $this->parsed['--META--']['counts'][$idx]++;
     }
 
+    /**
+     * IsAllowed
+     * Are you allowed to crawl a url?
+     *
+     * @access public
+     * @param  string  $url
+     * @param  string  $user_agent
+     * @return boolean
+     */
     public function isAllowed($url, $user_agent = '*') {
         if (count($this->parsed) == 0) {
             throw new \ErrorException('E-1');
@@ -341,6 +349,15 @@ class Parser {
         return $this->tr->isAllowed($user_agent, $url);
     }
 
+    /**
+     * IsDisAllowed
+     * Are you not allowed to crawl a url?
+     *
+     * @access public
+     * @param  string  $url
+     * @param  string  $user_agent
+     * @return boolean
+     */
     public function isDisallowed($url, $user_agent = '*') {
         if (count($this->parsed) == 0) {
             throw new \ErrorException('E-1');
@@ -359,6 +376,17 @@ class Parser {
         return true;
     }
 
+    /**
+     * Validate
+     * Validates the contents of the robot.txt file
+     *
+     * Strict mode will fail validation on any error
+     * While normal mode will only fail on critial errors
+     *
+     * @access public
+     * @param  boolean $strict
+     * @return boolean
+     */
     public function validate($strict = false) {
         if (count($this->parsed) == 0) {
             throw new \ErrorException('E-1');
@@ -388,13 +416,26 @@ class Parser {
         return true;
     }
 
+    /**
+     * InitTR
+     * Init the tomverran/robots-txt-checker class
+     *
+     * @access protected
+     */
     protected function init_tr() {
         if (is_null($this->tr)) {
             $this->tr = new RobotsTxt($this->getSource());
         }
     }
 
-    public function getTr() {
+    /**
+     * Get TR
+     * Returns the tomverran/robots-txt-checker object
+     *
+     * @access public
+     * @return null|tomverran/robots-txt-checker/RobotsTxt
+     */
+    public function getTR() {
         return $this->tr;
     }
 }

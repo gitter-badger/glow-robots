@@ -6,6 +6,10 @@ A toolset for parsing, validating, and generating a robots.txt file.
 
 The recommended way to install Glow\Robots is to use [composer](http://www.getcomposer.com)
 
+```
+composer require glow/robots
+```
+
 ## Usage
 
 ```

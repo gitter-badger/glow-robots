@@ -16,7 +16,6 @@ before_script:
     - travis_retry composer install --no-interaction --prefer-dist
 
 script: 
-    - phpunit tests
     - vendor/bin/phpunit tests --coverage-clover=coverage.xml
 
 after_success:

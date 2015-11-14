@@ -81,4 +81,9 @@ class ParserExceptionsTest extends PHPUnit_Framework_TestCase {
         $this->setExpectedException('ErrorException');
         $this->p->getUserAgentDisallow();
     }
+
+    public function test_get_meta_exception() {
+        $this->setExpectedException('ErrorException');
+        $this->p->getMeta();
+    }
 }

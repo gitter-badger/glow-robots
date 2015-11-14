@@ -120,4 +120,10 @@ class ParserCNNTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($allow[0], '/partners/ipad/live-video.json');
     }
 
+    public function test_get_user_agent_data_that_doesnt_exists() {
+        $ua_data = $this->p->getUserAgentData('SomeReallyFakeBot');
+        $this->assertCount(0, $ua_data);
+        $this->assertEquals($ua_data, array());
+    }
+
 }

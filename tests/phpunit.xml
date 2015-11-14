@@ -13,6 +13,7 @@
 			<directory suffix="ParserMethodsIntegrityTest">.</directory>
 			<directory suffix="ParserSetMethodsTest">.</directory>
 			<directory suffix="ParserExceptionsTest">.</directory>
+			<directory suffix="ParserTest">.</directory>
 		</testsuite>
 	</testsuites>
 </phpunit>

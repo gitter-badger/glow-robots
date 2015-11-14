@@ -1,0 +1,8 @@
+# nothing but comments
+## nothing but comments
+## nothing but comments
+## nothing but comments
+## nothing but comments
+
+User-agent: PHPUnitTestBox
+# nothing but comments

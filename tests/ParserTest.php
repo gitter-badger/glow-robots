@@ -84,6 +84,48 @@ class ParserTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($parsed_data['--META--']['counts']['lines'], 2);
     }
 
+    public function test_delimeter_missing() {
+        $contents = file_get_contents($this->_file_path('delimetermissing'));
+        $this->p->setSource($contents);
+        $this->p->parse();
+
+        $errors = $this->p->getErrors();
+        $this->assertCount(1, $errors);
+        $this->assertEquals($errors[0]['code'], 3);
+        $this->assertEquals($errors[0]['message'], 'The Allow directive expects a ":" delimeter before the element value!');
+        $this->assertEquals($errors[0]['line'], 2);
+        $this->assertEquals($errors[0]['level'], 'CRITICAL');
+    }
+
+    public function test_improper_directive_case() {
+        $contents = file_get_contents($this->_file_path('impropercase'));
+        $this->p->setSource($contents);
+        $this->p->parse();
+
+        $errors = $this->p->getErrors();
+        $this->assertCount(1, $errors);
+        $this->assertEquals($errors[0]['code'], 2);
+        $this->assertEquals($errors[0]['message'], 'Allow directive has improper casing - allow should be [Allow]');
+        $this->assertEquals($errors[0]['line'], 2);
+        $this->assertEquals($errors[0]['level'], 'WARN');
+    }
+
+    public function test_validate_non_strict() {
+        $contents = file_get_contents($this->_file_path('impropercase'));
+        $this->p->setSource($contents);
+        $this->p->parse();
+
+        $this->assertTrue($this->p->validate());
+    }
+
+    public function test_validate_strict() {
+        $contents = file_get_contents($this->_file_path('duplicate_useragent'));
+        $this->p->setSource($contents);
+        $this->p->parse();
+
+        $this->assertFalse($this->p->validate(true));
+    }
+
     protected function _file_path($name) {
         $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sample_robots' . DIRECTORY_SEPARATOR . $name . '.txt';
         return $path;

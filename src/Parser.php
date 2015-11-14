@@ -402,12 +402,8 @@ class Parser {
      * @return boolean
      */
     public function validate($strict = false) {
-        if (count($this->parsed) == 0) {
-            throw new \ErrorException('E-1');
-        }
-
-        if (is_null($this->getOriginalSource())) {
-            throw new \ErrorException('E-2');
+        if ($this->beenParsed === false) {
+            throw new \ErrorException('validate e-1');
         }
 
         //if we have no errors validation is good

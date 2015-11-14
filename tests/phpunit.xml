@@ -12,6 +12,7 @@
 			<directory suffix="ParserPropertiesDefaultsTest">.</directory>
 			<directory suffix="ParserMethodsIntegrityTest">.</directory>
 			<directory suffix="ParserSetMethodsTest">.</directory>
+			<directory suffix="ParserExceptionsTest">.</directory>
 		</testsuite>
 	</testsuites>
 </phpunit>

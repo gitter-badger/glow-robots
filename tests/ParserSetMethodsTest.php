@@ -65,4 +65,10 @@ class ParserSetMethodsTest extends PHPUnit_Framework_TestCase {
         $this->p = new Glow\Robots\Parser($str);
         $this->assertEquals($this->p->getOriginalSource(), $str);
     }
+
+    public function test_set_elements() {
+        $array = array('TEST' => 'VALUE');
+        $this->p->setElements($array);
+        $this->assertEquals($this->p->getElements(), $array);
+    }
 }

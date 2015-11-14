@@ -10,7 +10,8 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "tomverran/robots-txt-checker": "1.01"
+        "tomverran/robots-txt-checker": "1.01",
+        "php": ">=5.4.0"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.5"

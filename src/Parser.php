@@ -465,4 +465,45 @@ class Parser {
 
         return $this;
     }
+
+    /**
+     * Get Elements
+     * Get the elements that we search for
+     *
+     * @access public
+     * @return array
+     */
+    public function getElements() {
+        return $this->elements;
+    }
+
+    /**
+     * Set Elements
+     * Sets the elements we parse for (with)
+     * This is a dangerous thing and should not be used
+     *
+     * @access public
+     * @param array $elements - An array of shared and general elements
+     * @return Glow\Robots\Parser
+     */
+    public function setElements($elements) {
+        if (!is_array($elements)) {
+            throw new \ErrorException('setElements X-1');
+        }
+
+        $this->elements = $elements;
+
+        return $this;
+    }
+
+    /**
+     * Get Been Parsed
+     * Returns a boolean - true if the contents have been parsed
+     *
+     * @access public
+     * @return boolean
+     */
+    public function getBeenParsed() {
+        return $this->beenParsed;
+    }
 }

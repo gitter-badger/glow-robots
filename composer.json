@@ -12,9 +12,12 @@
     "require": {
         "tomverran/robots-txt-checker": "1.01"
     },
+    "require-dev": {
+        "fzaninotto/faker": "^1.5"
+    },
     "autoload": {
         "psr-4": {
-            "Glow\\Robots\\": ""
+            "Glow\\Robots\\": "src"
         }
     }
 }

@@ -1,0 +1,17 @@
+
+<phpunit
+	colors="false"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	stopOnError="false"
+	stopOnFailure="false"
+	stopOnIncomplete="false"
+	stopOnSkipped="false">
+	<testsuites>
+		<testsuite name="Glow Robots Test Suite">
+			<directory suffix="ParserPropertiesDefaultsTest">.</directory>
+			<directory suffix="ParserMethodsIntegrityTest">.</directory>
+			<directory suffix="ParserSetMethodsTest">.</directory>
+		</testsuite>
+	</testsuites>
+</phpunit>

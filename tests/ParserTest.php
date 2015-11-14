@@ -62,6 +62,28 @@ class ParserTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($parsed_data['--META--']['counts']['comments'], 6);
     }
 
+    public function test_duplicate_user_agent() {
+        $contents = file_get_contents($this->_file_path('duplicate_useragent'));
+        $this->p->setSource($contents);
+        $this->p->parse();
+
+        $errors = $this->p->getErrors();
+        $this->assertCount(1, $errors);
+        $this->assertEquals($errors[0]['code'], 4);
+        $this->assertEquals($errors[0]['message'], 'User Agent [*] was already defined!');
+        $this->assertEquals($errors[0]['line'], 4);
+        $this->assertEquals($errors[0]['level'], 'CRITICAL');
+    }
+
+    public function test_parse_line() {
+        $contents = file_get_contents($this->_file_path('basic'));
+        $this->p->setSource($contents);
+        $this->p->parse();
+
+        $parsed_data = $this->p->getParsed();
+        $this->assertEquals($parsed_data['--META--']['counts']['lines'], 2);
+    }
+
     protected function _file_path($name) {
         $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sample_robots' . DIRECTORY_SEPARATOR . $name . '.txt';
         return $path;

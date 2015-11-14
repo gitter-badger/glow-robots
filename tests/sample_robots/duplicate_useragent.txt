@@ -1,0 +1,5 @@
+User-agent: *
+something: somewhere
+
+User-agent: *
+somewhere: something

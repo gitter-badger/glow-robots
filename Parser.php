@@ -33,6 +33,15 @@ class Parser {
     protected $errors = array();
 
     /**
+     * Line Endings
+     * What Line endings are used?
+     *
+     * @access protected
+     * @var string
+     */
+    protected $lineEndings = "\r";
+
+    /**
      * Elements
      * What elements should we check for in the robots.txt file
      *
@@ -162,7 +171,7 @@ class Parser {
         $this->parsed['--META--']['user-agents'] = array();
 
         //explode our source by line returns
-        $xploded_file = explode("\r", $source);
+        $xploded_file = explode($this->getLineEndings(), $source);
 
         //if the size is above 500 add a warning
         if ($this->parsed['--META--']['size'] > 500) {
@@ -430,5 +439,30 @@ class Parser {
      */
     public function getTR() {
         return $this->tr;
+    }
+
+    /**
+     * Get Line Endings
+     * Returns the current line endings
+     *
+     * @access public
+     * @return string
+     */
+    public function getLineEndings() {
+        return $this->lineEndings;
+    }
+
+    /**
+     * Set Line Endings
+     * Allows a developer to set custom line endings
+     *
+     * @access public
+     * @param string $le - The characters that should be considered a line ending
+     * @return Glow\Robots\Parser
+     */
+    public function setLineEndings($le) {
+        $this->lineEndings = $le;
+
+        return $this;
     }
 }

@@ -168,7 +168,16 @@ class Parser {
         $this->parsed['--META--']['size'] = strlen($source) / 1000;
 
         //set some basic meta stuff
-        $this->parsed['--META--']['user-agents'] = array();
+        $this->parsed['--META--']['user-agents']                    = array();
+        $this->parsed['--META--']['counts']['user-agent']           = 0;
+        $this->parsed['--META--']['counts']['sitemap']              = 0;
+        $this->parsed['--META--']['counts']['disallow']             = 0;
+        $this->parsed['--META--']['counts']['host']                 = 0;
+        $this->parsed['--META--']['counts']['allow']                = 0;
+        $this->parsed['--META--']['counts']['empty-lines']          = 0;
+        $this->parsed['--META--']['counts']['skipped-due-to-error'] = 0;
+
+        $this->parsed['--SHARED--']['sitemap'] = array();
 
         //explode our source by line returns
         $xploded_file = explode($this->getLineEndings(), $source);
@@ -501,5 +510,95 @@ class Parser {
      */
     public function getBeenParsed() {
         return $this->beenParsed;
+    }
+
+    /**
+     * Get Meta
+     * Returns the meta data that was extrapolated from the robots.txt contents
+     *
+     * @access public
+     * @return array
+     */
+    public function getMeta() {
+        if ($this->beenParsed === false) {
+            throw new \ErrorException('getMeta E-1');
+        }
+
+        return $this->parsed['--META--'];
+    }
+
+    /**
+     * Get Sitemaps
+     * Returns an array of sitemaps discovered in the robots.txt contents
+     *
+     * @access public
+     * @return array
+     */
+    public function getSitemaps() {
+        if ($this->beenParsed === false) {
+            throw new \ErrorException('getSitemaps E-1');
+        }
+
+        return $this->parsed['--SHARED--']['sitemap'];
+    }
+
+    /**
+     * Get User Agent Data
+     * Returns all of the parsed directives for a specified useragent
+     *
+     * @access public
+     * @param  string $ua - The useragent string name
+     * @return array
+     */
+    public function getUserAgentData($ua = '*') {
+        if ($this->beenParsed === false) {
+            throw new \ErrorException('getUserAgent Data E-1');
+        }
+
+        if (isset($this->parsed[$ua])) {
+            return $this->parsed[$ua];
+        }
+
+        return array();
+    }
+
+    /**
+     * Get User Agent Allow
+     * Returns all of the allowed elements for a specified useragent
+     *
+     * @access public
+     * @param  string $ua - The useragent name string
+     * @return array
+     */
+    public function getUserAgentAllow($ua = '*') {
+        if ($this->beenParsed === false) {
+            throw new \ErrorException('getUserAgentAllow E-1');
+        }
+
+        if (isset($this->parsed[$ua]['allow'])) {
+            return $this->parsed[$ua]['allow'];
+        }
+
+        return array();
+    }
+
+    /**
+     * Get User Agent Disallow
+     * Returns all of the disallowed elements for a specified useragent
+     *
+     * @access public
+     * @param  string $ua - The useragent name string
+     * @return array
+     */
+    public function getUserAgentDisallow($ua = '*') {
+        if ($this->beenParsed === false) {
+            throw new \ErrorException('getUserAgentDisallow E-1');
+        }
+
+        if (isset($this->parsed[$ua]['disallow'])) {
+            return $this->parsed[$ua]['disallow'];
+        }
+
+        return array();
     }
 }

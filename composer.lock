@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6cbd48ecabc8b5449646c9e8e5454df7",
-    "content-hash": "f5da5681852df58870357d013f11caaa",
+    "hash": "5130ae7f2a9ce8c3465a77c46707ac9c",
+    "content-hash": "03cd54da124914917750b30c2a8c11d5",
     "packages": [
         {
             "name": "tomverran/robots-txt-checker",
-            "version": "1.01",
+            "version": "1.02-beta",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tomverran/robots.git",
-                "reference": "84fc519aa9cc2def5ed1b909a20594cba3fd8fe9"
+                "reference": "dbac85195b6f76647a5948a62b5e08eb81b015eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tomverran/robots/zipball/84fc519aa9cc2def5ed1b909a20594cba3fd8fe9",
-                "reference": "84fc519aa9cc2def5ed1b909a20594cba3fd8fe9",
+                "url": "https://api.github.com/repos/tomverran/robots/zipball/dbac85195b6f76647a5948a62b5e08eb81b015eb",
+                "reference": "dbac85195b6f76647a5948a62b5e08eb81b015eb",
                 "shasum": ""
             },
             "require": {
@@ -50,7 +50,7 @@
                 "crawler",
                 "robots.txt"
             ],
-            "time": "2014-07-09 09:41:15"
+            "time": "2015-11-10 22:26:48"
         }
     ],
     "packages-dev": [
@@ -1057,7 +1057,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "tomverran/robots-txt-checker": 10
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -126,4 +126,30 @@ class ParserCNNTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($ua_data, array());
     }
 
+    public function test_get_user_agent_data_that_does_exists() {
+        $ua_data = $this->p->getUserAgentData('*');
+        $this->assertEquals(is_array($ua_data), true);
+        $this->assertArrayHasKey('allow', $ua_data);
+        $this->assertArrayHasKey('disallow', $ua_data);
+    }
+
+    public function test_get_user_agent_allow_that_doesnt_exists() {
+        $ua_data = $this->p->getUserAgentAllow('SomeFakeUA');
+        $this->assertCount(0, $ua_data);
+        $this->assertEquals($ua_data, array());
+    }
+
+    public function test_get_user_agent_disallow_that_doesnt_exists() {
+        $ua_data = $this->p->getUserAgentDisallow('SomeFakeUa');
+        $this->assertCount(0, $ua_data);
+        $this->assertEquals($ua_data, array());
+    }
+
+    public function test_isallowed() {
+        $this->assertTrue($this->p->isAllowed('/somegoodurl.php'));
+    }
+
+    public function test_isdisallowed() {
+        $this->assertTrue($this->p->isDisallowed('/help/cnnx.html'));
+    }
 }

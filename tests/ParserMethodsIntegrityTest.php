@@ -35,7 +35,7 @@ class ParserMethodsIntegrityTest extends PHPUnit_Framework_TestCase {
     }
 
     public function test_methods_count() {
-        $this->assertCount(25, $this->reflection->getMethods());
+        $this->assertCount(23, $this->reflection->getMethods());
     }
 
     public function test_make_sure_we_have_these_methods() {
@@ -55,8 +55,6 @@ class ParserMethodsIntegrityTest extends PHPUnit_Framework_TestCase {
             'isDisallowed',
             'validate',
             'getTR',
-            'getLineEndings',
-            'setLineEndings',
             'getElements',
             'setElements',
             'getBeenParsed',
@@ -89,8 +87,6 @@ class ParserMethodsIntegrityTest extends PHPUnit_Framework_TestCase {
             'isDisallowed',
             'validate',
             'getTR',
-            'getLineEndings',
-            'setLineEndings',
             'getElements',
             'setElements',
             'getBeenParsed',

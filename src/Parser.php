@@ -33,15 +33,6 @@ class Parser {
     protected $errors = array();
 
     /**
-     * Line Endings
-     * What Line endings are used?
-     *
-     * @access protected
-     * @var string
-     */
-    protected $lineEndings = "\r";
-
-    /**
      * Elements
      * What elements should we check for in the robots.txt file
      *
@@ -180,7 +171,8 @@ class Parser {
         $this->parsed['--SHARED--']['sitemap'] = array();
 
         //explode our source by line returns
-        $xploded_file = explode($this->getLineEndings(), $source);
+        //cross-platform regex src: http://pcre.org/pcre.txt (RTFM)
+        $xploded_file = preg_split('/\R/', $source);
 
         //if the size is above 500 add a warning
         if ($this->parsed['--META--']['size'] > 500) {
@@ -208,19 +200,21 @@ class Parser {
             }
 
             //we handle comments a special way
-            if (substr($line, 0, 1) == '#') {
-                $this->increment_counter('comments');
-                $comment = ltrim($line, '#');
+            if(($pos = strpos($line, '#')) !== false) {
+            	$comment = substr($line, $pos, strlen($line) - $pos);
+            	$line    = substr($line, 0, $pos);
 
                 if (!empty($comment)) {
+	                $this->increment_counter('comments');
                     if (is_null($current_user_agent)) {
                         $this->parsed['--UNTRACKED--']['comments'][] = $comment;
                     } else {
                         $this->parsed[$current_user_agent]['comments'][] = $comment;
                     }
                 }
-
-                continue;
+                if(empty($line)) {
+	                continue;
+                }
             }
 
             //check for a user agent update
@@ -444,31 +438,6 @@ class Parser {
      */
     public function getTR() {
         return $this->tr;
-    }
-
-    /**
-     * Get Line Endings
-     * Returns the current line endings
-     *
-     * @access public
-     * @return string
-     */
-    public function getLineEndings() {
-        return $this->lineEndings;
-    }
-
-    /**
-     * Set Line Endings
-     * Allows a developer to set custom line endings
-     *
-     * @access public
-     * @param string $le - The characters that should be considered a line ending
-     * @return Glow\Robots\Parser
-     */
-    public function setLineEndings($le) {
-        $this->lineEndings = $le;
-
-        return $this;
     }
 
     /**

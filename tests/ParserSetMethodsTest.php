@@ -54,12 +54,6 @@ class ParserSetMethodsTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($this->p->getOriginalSource(), $str);
     }
 
-    public function test_set_line_endings() {
-        $str = $this->f->randomLetter;
-        $this->p->setLineEndings($str);
-        $this->assertEquals($this->p->getLineEndings(), $str);
-    }
-
     public function test_construct_default() {
         $str     = $this->f->word;
         $this->p = new Glow\Robots\Parser($str);

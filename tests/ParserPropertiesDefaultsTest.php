@@ -49,10 +49,6 @@ class ParserPropertiesDefaultsTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(count($this->p->getErrors()), 0);
     }
 
-    public function test_property_default_lineEndings() {
-        $this->assertEquals($this->p->getLineEndings(), "\r");
-    }
-
     public function test_property_default_elements() {
         $elements = $this->p->getElements();
 

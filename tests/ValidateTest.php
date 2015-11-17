@@ -66,6 +66,13 @@ class ValidateTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue($this->p->check());
     }
 
+    public function test_construct() {
+        $contents = file_get_contents($this->_file_path('cnn'));
+        $this->p  = new Glow\Robots\Validate($contents);
+
+        $this->assertTrue($this->p->check());
+    }
+
     protected function _file_path($name) {
         $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sample_robots' . DIRECTORY_SEPARATOR . $name . '.txt';
         return $path;

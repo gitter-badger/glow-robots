@@ -15,6 +15,9 @@
 			<directory suffix="ParserExceptionsTest">.</directory>
 			<directory suffix="ParserTest">.</directory>
 			<directory suffix="ParserCNNTest">.</directory>
+			
+			<directory suffix="ValidatePropertiesDefaultsTest">.</directory>
+			<directory suffix="ValidateTest">.</directory>
 		</testsuite>
 	</testsuites>
 </phpunit>

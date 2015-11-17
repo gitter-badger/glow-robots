@@ -52,11 +52,6 @@ class ParserExceptionsTest extends PHPUnit_Framework_TestCase {
         $this->p->IsDisallowed('test');
     }
 
-    public function test_validate_not_parsed() {
-        $this->setExpectedException('ErrorException');
-        $this->p->validate();
-    }
-
     public function test_set_elements_non_array() {
         $this->setExpectedException('ErrorException');
         $this->p->setElements(new stdClass());

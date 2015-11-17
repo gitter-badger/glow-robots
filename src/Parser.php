@@ -200,20 +200,20 @@ class Parser {
             }
 
             //we handle comments a special way
-            if(($pos = strpos($line, '#')) !== false) {
-            	$comment = substr($line, $pos, strlen($line) - $pos);
-            	$line    = substr($line, 0, $pos);
+            if (($pos = strpos($line, '#')) !== false) {
+                $comment = substr($line, $pos, strlen($line) - $pos);
+                $line    = substr($line, 0, $pos);
 
                 if (!empty($comment)) {
-	                $this->increment_counter('comments');
+                    $this->increment_counter('comments');
                     if (is_null($current_user_agent)) {
                         $this->parsed['--UNTRACKED--']['comments'][] = $comment;
                     } else {
                         $this->parsed[$current_user_agent]['comments'][] = $comment;
                     }
                 }
-                if(empty($line)) {
-	                continue;
+                if (empty($line)) {
+                    continue;
                 }
             }
 
@@ -388,42 +388,6 @@ class Parser {
 
         if ($this->tr->isAllowed($user_agent, $url) === true) {
             return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Validate
-     * Validates the contents of the robot.txt file
-     *
-     * Strict mode will fail validation on any error
-     * While normal mode will only fail on critial errors
-     *
-     * @access public
-     * @param  boolean $strict
-     * @return boolean
-     */
-    public function validate($strict = false) {
-        if ($this->beenParsed === false) {
-            throw new \ErrorException('validate e-1');
-        }
-
-        //if we have no errors validation is good
-        if (count($this->errors) == 0) {
-            return true;
-        }
-
-        //if strict mode is on and we have errors baddddd
-        if ($strict === true) {
-            return false;
-        }
-
-        //if we are not in strict mode we just want to find critical errors
-        foreach ($this->errors as $error) {
-            if ($error['level'] == 'CRITICAL') {
-                return false;
-            }
         }
 
         return true;

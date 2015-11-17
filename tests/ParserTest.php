@@ -110,22 +110,6 @@ class ParserTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($errors[0]['level'], 'WARN');
     }
 
-    public function test_validate_non_strict() {
-        $contents = file_get_contents($this->_file_path('impropercase'));
-        $this->p->setSource($contents);
-        $this->p->parse();
-
-        $this->assertTrue($this->p->validate());
-    }
-
-    public function test_validate_strict() {
-        $contents = file_get_contents($this->_file_path('duplicate_useragent'));
-        $this->p->setSource($contents);
-        $this->p->parse();
-
-        $this->assertFalse($this->p->validate(true));
-    }
-
     protected function _file_path($name) {
         $path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sample_robots' . DIRECTORY_SEPARATOR . $name . '.txt';
         return $path;
